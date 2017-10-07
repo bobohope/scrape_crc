@@ -10,7 +10,7 @@ def start_scraping(string):
     rq= s.get(string)
     url = []
     soup = ''
-    output=[None]*11
+    output=[None]*12
     all_content=[]
     soup = BeautifulSoup(rq.text,'html.parser')
     #print html file for debug only
