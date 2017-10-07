@@ -85,6 +85,8 @@ def start_scraping(string):
     print('story_title: ',story_title)
     #get story_content
     story=soup.find('div',id="ContentPlaceHolderCenter_FormView1_PanelStory").text
+    import re
+    story = re.sub('\s+', ' ', story)
     output[11]=story
     print('story: ',story)
 
