@@ -14,7 +14,7 @@ def start_scraping(string):
     rq= s.get(string)
     url = []
     soup = ''
-    output=[None]*12
+    output=[None]*14
     all_content=[]
     soup = BeautifulSoup(rq.text,'html.parser')
     #print html file for debug only
@@ -108,18 +108,21 @@ def start_scraping(string):
 
 def checkstatus(string):
     import requests
+    s = requests.session()
+    rq= s.get(string)
     soup = ''
-    chair_title = soup.find('span',id="ContentPlaceHolderCenter_FormView1_ChairTitleLabel").text 
+    soup = BeautifulSoup(rq.text,'html.parser')
+    chair_title = soup.find('h1').text
     request = requests.get(string)
     if request.status_code == 200:
-        if  chair_title != None:
+        if  len(chair_title.split()) != 1:
             return True
-    else:
-        return False
+    return False
 
 if __name__ == "__main__":
     url_base = 'http://www.chairs-chaires.gc.ca/chairholders-titulaires/profile-eng.aspx?profileId='
     for i in range(0, 2000):
         if checkstatus(url_base+str(i)) == True:
+            print(i)
             start_scraping(url_base+str(i))
 
