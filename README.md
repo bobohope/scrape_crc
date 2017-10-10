@@ -26,7 +26,7 @@ I recommend to set a sleeping period in case the website has anti-scraping featu
 
 谁想负责哪一个的告诉我。
 
-https://drive.google.com/drive/folders/0BxEzV1-TcoG7ZWNjLXFwdVJVRjQ?usp=sharing
+
 
 我重新发一次分享文件夹的链接，里面有所有教授的列表。我已经把所有资料分为了5部分，Medicine, applied science, natural science, economics, and misc
 
