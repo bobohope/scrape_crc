@@ -108,9 +108,12 @@ def start_scraping(string):
 
 def checkstatus(string):
     import requests
+    soup = ''
+    chair_title = soup.find('span',id="ContentPlaceHolderCenter_FormView1_ChairTitleLabel").text 
     request = requests.get(string)
     if request.status_code == 200:
-        return True
+        if  chair_title != None:
+            return True
     else:
         return False
 
@@ -118,6 +121,5 @@ if __name__ == "__main__":
     url_base = 'http://www.chairs-chaires.gc.ca/chairholders-titulaires/profile-eng.aspx?profileId='
     for i in range(0, 2000):
         if checkstatus(url_base+str(i)) == True:
-            print(i)
             start_scraping(url_base+str(i))
 
