@@ -7,6 +7,14 @@ import time
 #First, add a function to check if the prof id is available
 #Second, add in line 28 to output first name and last name, output[1] and output[2]
 #Third, add a function that write all the message to a csv file.
+
+def parse_name(string):
+    '''input full name, output a list of 2 string, lastname first'''
+    name_split=string.split()
+    lastname=name_split[-1]
+    del name_split[-1]
+    firstname=" ".join(name_split)
+    return [lastname, firstname]
 def start_scraping(string):
     #start a session (if you have no idea what is a session, google plz)
     s = requests.session()
@@ -19,13 +27,15 @@ def start_scraping(string):
     soup = BeautifulSoup(rq.text,'html.parser')
     #print html file for debug only
     #print(soup.prettify())
-
     #get name
     #<h1 id="ContentPlaceHolderCenter_H1" class="border-bottom-none">Jacques Albert</h1>
     name = soup.find('h1').text
     output[0] = name
     print('name: ',name)
     #TODO:parse the full name into lastname and first name
+    name_split=parse_name(name)
+    output[1]=name_split[0]
+    output[2]=name_split[1]
     #new_name = name.split()
     #if len(new_name) == 3:
     #    output[1] = new_name[0]
@@ -121,8 +131,9 @@ def checkstatus(string):
 
 if __name__ == "__main__":
     url_base = 'http://www.chairs-chaires.gc.ca/chairholders-titulaires/profile-eng.aspx?profileId='
-    for i in range(0, 2000):
-        if checkstatus(url_base+str(i)) == True:
-            print(i)
-            start_scraping(url_base+str(i))
-
+    print(checkstatus(url_base+str(1070)))
+    start_scraping(url_base+str(1070))
+    # for i in range(0, 2000):
+    #     if checkstatus(url_base+str(i)) == True:
+    #         print(i)
+    #         start_scraping(url_base+str(i))
