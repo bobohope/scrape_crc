@@ -86,9 +86,11 @@ def start_scraping(string):
 
     #get website
     #<a id="ContentPlaceHolderCenter_FormView1_ChairUrlLink" title="http://www.doe.carleton.ca/~jalbert/" href="http://www.doe.carleton.ca/~jalbert/" class="ui-link">Website</a>
-    website=soup.find('a',id="ContentPlaceHolderCenter_FormView1_ChairUrlLink")['href']
-    output[9]=website
-    print('website: ',website)
+
+    website_archer=soup.find('a',id="ContentPlaceHolderCenter_FormView1_ChairUrlLink")
+    if website_archer is not None:
+        output[9]=website_archer['href']
+    print('website: ',output[9])
     #get research_involve
     #<span id="ContentPlaceHolderCenter_FormView1_ResearchInvolvesLabel">Designing, fabricating, and testing photonic components that have been fabricated by laser light processing of high-performance optical materials.</span>
     research_involve=soup.find('span',id="ContentPlaceHolderCenter_FormView1_ResearchInvolvesLabel").text
@@ -131,9 +133,11 @@ def checkstatus(string):
 
 if __name__ == "__main__":
     url_base = 'http://www.chairs-chaires.gc.ca/chairholders-titulaires/profile-eng.aspx?profileId='
-    print(checkstatus(url_base+str(1070)))
-    start_scraping(url_base+str(1070))
-    # for i in range(0, 2000):
-    #     if checkstatus(url_base+str(i)) == True:
-    #         print(i)
-    #         start_scraping(url_base+str(i))
+    # print(checkstatus(url_base+str(1070)))
+    # start_scraping(url_base+str(1070))
+    for i in range(1, 1000):
+        if checkstatus(url_base+str(i)) == True:
+            print(i)
+            start_scraping(url_base+str(i))
+            #this is VERY IMPORTANT to prevent being blocked!!!!!!!!
+            time.sleep(2)
