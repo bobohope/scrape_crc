@@ -152,11 +152,11 @@ if __name__ == "__main__":
     #print(checkstatus(soup))
     #outout = start_scraping(soup)
     #write_to_csv(outout)
-    for i in range(3504, 5000):
+    for i in range(3808, 5000):
         soup=get_html(url_base+str(i))
         if checkstatus(soup) == True:
             print("start_scraping--", i)
             info=start_scraping(soup)
             write_to_csv(info)
             #this is VERY IMPORTANT to prevent being blocked!!!!!!!!
-        time.sleep(0.5)
+        time.sleep(1)
